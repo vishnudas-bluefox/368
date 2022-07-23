@@ -67,6 +67,7 @@ class NewsfeedUpdateAPIView(generics.UpdateAPIView):
     lookup_field = 'pk'
 
     def perform_update(self, serializer):
+        print(serializer)
         instance = serializer.save()
         if not instance.content:
             instance.content = "No content"
@@ -75,3 +76,17 @@ class NewsfeedUpdateAPIView(generics.UpdateAPIView):
         
 
 Newsfeed_update_view = NewsfeedUpdateAPIView.as_view()
+
+
+# Delete the data from the table
+class NewsfeedDestroyAPIView(generics.DestroyAPIView):
+    queryset = Newsfeed.objects.all()
+    serializer_class = NewsfeedSerializer
+    lookup_field = 'pk'
+
+    def perform_update(self, instance):
+        super().perform_destroy(instance)
+             
+
+Newsfeed_delete_view = NewsfeedDestroyAPIView.as_view()
+

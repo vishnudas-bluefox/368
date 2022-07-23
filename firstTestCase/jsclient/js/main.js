@@ -29,9 +29,9 @@ function create() {
         comments: 0,
     }
 
-    request.open('POST', ' http://127.0.0.1:8000/api/mothali/')
-    request.setRequestHeader('Content-type', 'application/json')
-    request.send(JSON.stringify(params)) // Make sure to stringify
+    request.open('POST', ' http://127.0.0.1:8000/api/mothali/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
     console.log(params);
 }
 
@@ -56,21 +56,32 @@ function getData() {
 
 // update the current data available 
 
-function update() {
+function updatebyid() {
+    const postid = document.querySelector('#postid').value;
     // Form fields, see IDs above
     const params = {
-        postid: document.querySelector('#postid').value,
         userid: "id4",
         title: document.querySelector('#title').value,
         content: document.querySelector('#content').value,
     }
-
-    request.open('UPDATE', ' http://127.0.0.1:8000/api/mothali/' + params['postid'] + '/update/')
-    request.setRequestHeader('Content-type', 'application/json')
-    request.send(JSON.stringify(params)) // Make sure to stringify
+    const data = request.open('GET', 'http://127.0.0.1:8000/api/mothali/' + postid + '/');
+    console.log(data);
+    request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/' + postid + '/update/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
     console.log(params);
 }
-
+// delete the content by id 
+function deleteby() {
+    // Form fields, see IDs above
+    const params = {
+        postid: document.querySelector('#deletefeedid').value,
+    }
+    request.open('DELETE', 'http://127.0.0.1:8000/api/mothali/' + params['postid'] + '/delete/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(); // Make sure to stringify
+    console.log(params);
+}
 
 
 // fetch api for get data

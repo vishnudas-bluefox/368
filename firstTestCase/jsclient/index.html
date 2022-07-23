@@ -29,13 +29,18 @@
             <input type="number" name="feedid" id="feedid" placeholder="feedid">
             <button onclick="getData()">list one</button>
         </div>
-        <div class="createdata">
+        <div class="updatedata">
             <h3>Update the datas with post request</h3>
             <input id="postid" type="number" placeholder="postid">
             <input id="title" type="text" placeholder="title">
             <input id="content" type="text" placeholder="content">
             <br>
-            <button onclick="update()">Submit</button>
+            <button onclick="updatebyid()">Submit</button>
+        </div>
+        <div class="list">
+            <h3>Delete single data</h3>
+            <input type="number" name="deletefeedid" id="deletefeedid" placeholder="feedid">
+            <button onclick="deleteby()">Delete data</button>
         </div>
 
     </div>

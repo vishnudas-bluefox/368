@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:pk>/',views.Newsfeed_detail_view),
     path('list/',views.Newsfeed_list_view),
     path('<int:pk>/update/',views.Newsfeed_update_view),
+    path('<int:pk>/delete/',views.Newsfeed_delete_view),
 ]
