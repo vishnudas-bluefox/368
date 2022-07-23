@@ -60,12 +60,9 @@ function updatebyid() {
     const postid = document.querySelector('#postid').value;
     // Form fields, see IDs above
     const params = {
-        userid: "id4",
-        title: document.querySelector('#title').value,
-        content: document.querySelector('#content').value,
+        title: document.querySelector('#updatetitle').value,
+        content: document.querySelector('#updatecontent').value,
     }
-    const data = request.open('GET', 'http://127.0.0.1:8000/api/mothali/' + postid + '/');
-    console.log(data);
     request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/' + postid + '/update/');
     request.setRequestHeader('Content-type', 'application/json');
     request.send(JSON.stringify(params)); // Make sure to stringify
