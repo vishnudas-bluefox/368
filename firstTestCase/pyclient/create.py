@@ -7,9 +7,6 @@ data = {
     "title":"thihgdjhgd",
     "content":"Mannaram company ux.ksjdhksgdgdlhgdhgdniversity:",
     "media": "medkjshdkia url here",
-    "like" : 2,
-    "dislike":82,
-    "comments": 69,
 }
 
 get_response = requests.post(endpoint,json=data)
