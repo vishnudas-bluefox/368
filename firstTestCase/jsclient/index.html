@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js api handle</title>
+    <link rel="stylesheet" href="cs/main.css">
+</head>
+
+<body>
+    <h1>Handle the api </h1>
+    <div class="container">
+        <div class="listall">
+            <h3>list all data available</h3>
+            <button onclick="getAllData()">list all</button>
+        </div>
+        <div class="createdata">
+            <h3>Create new data with Post request</h3>
+            <input id="userid" type="text" placeholder="userid">
+            <input id="title" type="text" placeholder="title">
+            <input id="content" type="text" placeholder="content">
+            <br>
+            <button onclick="return create()">Submit</button>
+        </div>
+        <div class="list">
+            <h3>list single data</h3>
+            <input type="number" name="feedid" id="feedid" placeholder="feedid">
+            <button onclick="getData()">list one</button>
+        </div>
+        <div class="createdata">
+            <h3>Update the datas with post request</h3>
+            <input id="postid" type="number" placeholder="postid">
+            <input id="title" type="text" placeholder="title">
+            <input id="content" type="text" placeholder="content">
+            <br>
+            <button onclick="update()">Submit</button>
+        </div>
+
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
