@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'api',
     'mothali',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'pdf',
     
 ]
 

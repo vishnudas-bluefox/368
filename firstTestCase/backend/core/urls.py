@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('api.urls')),
     path('api/mothali/',include('mothali.urls')),
+    path('api/pdf/',include('pdf.urls')),
 ]

@@ -1,4 +1,5 @@
 from django.urls import path
+from requests import request
 
 from . import views
 
@@ -8,4 +9,5 @@ urlpatterns = [
     path('list/',views.Newsfeed_list_view),
     path('<int:pk>/update/',views.Newsfeed_update_view),
     path('<int:pk>/delete/',views.Newsfeed_delete_view),
+
 ]

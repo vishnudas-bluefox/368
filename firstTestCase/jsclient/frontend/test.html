@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="questions">
+        <input type="text" id="disabledTextInput" class="form-control information" placeholder="Question1">
+    </div>
+    <button onclick="addfield()">Add</button>
+    <button onclick="createpdf()">Submit</button>
+
+    <script>
+        const addfield = () => {
+            const questions = document.querySelector('.questions');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control information';
+            input.placeholder = 'Question';
+            questions.appendChild(input);
+        }
+
+        function createpdf() {
+            console.log("create pdf");
+        }
+    </script>
+</body>
+
+</html>

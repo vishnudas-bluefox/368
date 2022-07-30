@@ -1,5 +1,5 @@
 div {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     padding: 10px;
 }
 
@@ -16,4 +16,20 @@ button {
     border: none;
     border-style: none;
     text-align: center;
+}
+
+.title {
+    font-weight: 600;
+    display: block;
+    color: blue;
+}
+
+.content {
+    display: block;
+    text-decoration: solid;
+    color: chartreuse;
+}
+
+.product {
+    border: 1px solid rebeccapurple;
 }
