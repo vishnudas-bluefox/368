@@ -11,5 +11,7 @@ urlpatterns = [
     path('<int:pk>/delete/',views.Newsfeed_delete_view),
     path('questions/',views.Question_create_api_view),
     path('questions/list/',views.Questions_list_view),
+    path('newsfeed/upvote/',views.upvote),
+    path('newsfeed/downvote/',views.downvote),
 
 ]

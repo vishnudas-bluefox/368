@@ -121,3 +121,25 @@ class QuestionsListAPIView(generics.ListAPIView):
     serializer_class = QuestionSerializer 
 
 Questions_list_view = QuestionsListAPIView.as_view()
+
+@api_view(['PATCH'])
+def upvote(request):
+    if request.method == 'PATCH':
+        data = request.data
+        feeddata = Newsfeed.objects.get(pk=request.data['id'])
+        feeddata.like = feeddata.like + 1
+        feeddata.save()
+        return Response({"message": "upvote success"})
+    else:
+        return Response({"success": False})
+
+@api_view(['PATCH'])
+def downvote(request):
+    if request.method == 'PATCH':
+        data = request.data
+        feeddata = Newsfeed.objects.get(pk=request.data['id'])
+        feeddata.dislike = feeddata.dislike + 1
+        feeddata.save()
+        return Response({"message": "downvote success"})
+    else:
+        return Response({"success": False})

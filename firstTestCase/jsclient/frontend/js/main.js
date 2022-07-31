@@ -15,6 +15,7 @@ window.onload = function() {
                 output += ` 
 <div class="post" id="firstpost">
 <br>
+<input type="hidden" id="pandaid" value="${data[i].id}" onclick="getid()">
 <div class="d-flex d-grid gap-2 d-md-block">
   <button class="buttontransperent ms-3" type="button">${data[i].userid}</button>
   <button class="buttontransperent ms-2 id=ffirstpost" type="button" onclick="followed('ffirstpost')">Follow +</button>
@@ -29,7 +30,7 @@ window.onload = function() {
 </div>
 <div class="postbuttons mb-0">
   <div class=" d-flex align-items-center justify-content-center container-fluid" style="height: 50px;">
-    <button type="button" style="margin: auto" class=" buttontransperent" id="upvotethepost" onclick='upvote()'><i class="fas fa-arrow-circle-up fa-2x"></i><h3 id="ufirstpost" style="display: inline;margin-left: 5px;"></h3>${data[i].like}</button>
+    <button type="button" style="margin: auto" class=" buttontransperent" onclick="upvote()"><i class="fas fa-arrow-circle-up fa-2x"></i><h3 id="ufirstpost" style="display: inline;margin-left: 5px;"></h3>${data[i].like}</button>
     <button type="button" style="margin: auto" class=" buttontransperent" onclick='downvote()'><i class="fas fa-arrow-circle-down fa-2x"></i><h3 id="dfirstpost" style="display: inline;margin-left: 5px;"></h3>${data[i].dislike}</button>
     <button type="button" style="margin: auto" class=" buttontransperent"data-bs-toggle="collapse" data-bs-target="#airstpost" aria-expanded="false" aria-controls="collapseExample"><i class="far fa-comment fa-2x"></i>${data[i].comments}</button>
     <button type="button" style="margin: auto" class=" buttontransperent"data-bs-toggle="modal" data-bs-target="#options"onclick='postcommentid("firstpost")'><i class="fas fa-ellipsis-v fa-2x"></i></button>
@@ -79,11 +80,69 @@ function addfield() {
 }
 
 
-
-// for upvoting the post 
-function upvote() {
-    const orginalid = document.getElementById("upvotethepost");
-    const pandaid = document.getElementById("pandaid");
-    console.log(orginalid);
+function getid() {
+    const pandaid = document.getElementById("pandaid").value;
     console.log(pandaid);
+    console.log("getid");
+}
+
+function upvote() {
+    const params = {
+        id: document.getElementById("pandaid").value,
+    }
+    console.log(params);
+    request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/newsfeed/upvote/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
+    console.log(params);
+}
+
+function downvote() {
+    const params = {
+        id: document.getElementById("pandaid").value,
+    }
+    console.log(params);
+    request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/newsfeed/downvote/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
+    console.log(params);
+}
+
+function editbutton() {
+    const params = {
+        userid: document.getElementById("pandaid").value,
+        title: document.getElementById("feedtitle").value,
+        content: document.getElementById("feedcontent").value,
+    }
+
+    request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/' + params['userid'] + "/update");
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
+    console.log(params);
+
+}
+
+function deleteby() {
+    // Form fields, see IDs above
+    const params = {
+        postid: document.getElementById("pandaid").value,
+
+    }
+    request.open('DELETE', 'http://127.0.0.1:8000/api/mothali/' + params['postid'] + '/delete/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(); // Make sure to stringify
+    console.log(params);
+}
+
+function updatebyid() {
+    const postid = document.querySelector('#postid').value;
+    // Form fields, see IDs above
+    const params = {
+        title: document.querySelector('#updatetitle').value,
+        content: document.querySelector('#updatecontent').value,
+    }
+    request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/' + postid + '/update/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
+    console.log(params);
 }

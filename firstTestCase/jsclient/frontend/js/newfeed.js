@@ -18,7 +18,7 @@ function createfeed() {
         comments: 0,
     }
 
-    request.open('PATCH', 'http://127.0.0.1:8000/api/mothali/' + postid + '/update/');
+    request.open('POST', 'http://127.0.0.1:8000/api/mothali/');
     request.setRequestHeader('Content-type', 'application/json');
     request.send(JSON.stringify(params)); // Make sure to stringify
     console.log(params);
