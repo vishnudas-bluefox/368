@@ -47,8 +47,15 @@
         </div>
         <div class="buttons">
             <button type="button" class="add" onclick="addfield()">Add</button>
-            <button type="button" class="submit" onclick="passalldata()">Submit</button>
+            <a href="../../backend/test6.pdf" target="_blank">
+                <button type="button" class="submit" onclick="passalldata()">Submit</button>
+            </a>
+
+            <!-- <a href="../../backend/test6.pdf" target="_blank">
+                <input type="button" class="viewpdf" value="View">
+            </a> -->
         </div>
+
     </form>
 
 
@@ -75,44 +82,8 @@
 
 
 
-    <script>
-        function addfield() {
-            const questions = document.querySelector('.questions');
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'form-control information';
-            input.id = "questions";
-            input.placeholder = 'Question';
-            questions.appendChild(input);
-        }
-
-        function passalldata() {
-            const request = new XMLHttpRequest()
-            const params = {
-                refernceid: document.querySelector('#refernceid').value,
-                fromname: document.querySelector('#fromname').value,
-                fromaddress: document.querySelector('#fromaddress').value,
-                toname: document.querySelector('#toname').value,
-                todesignation: document.querySelector('#todesignation').value,
-                toaddress: document.querySelector('#toaddress').value,
-                onewordrti: document.querySelector('#onewordrti').value,
-
-            };
-            const questions = document.querySelectorAll("#questions");
-            const questionsArray = [];
-            for (let i = 0; i < questions.length; i++) {
-                questionsArray.push(questions[i].value);
-            }
-            params.questions = questionsArray;
-
-            //pass pdf params to create pdf
-            request.open('POST', ' http://127.0.0.1:8000/api/pdf/rtipdf/');
-            request.setRequestHeader('Content-type', 'application/json');
-            request.send(JSON.stringify(params)); // Make sure to stringify
-            console.log(params);
-
-        }
-    </script>
+    <!-- Optional JavaScript -->
+    <script src="js/rti_form.js"></script>
 </body>
 
 </html>

@@ -144,3 +144,63 @@ function createpdf() {
 //             console.log(error);
 //         } // error
 //     );
+
+
+function createquestion() {
+    // Form fields, see IDs above
+    const params = {
+        userid: document.querySelector('#quserid').value,
+        subject: document.querySelector('#subject').value,
+        description: document.querySelector('#description').value,
+        like: 0,
+        dislike: 0,
+        answers: 0,
+    }
+
+    request.open('POST', ' http://127.0.0.1:8000/api/mothali/questions/');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(params)); // Make sure to stringify
+    console.log(params);
+}
+
+
+// list all questions 
+function getAllquestions() {
+    request.open('GET', 'http://127.0.0.1:8000/api/mothali/questions/list/');
+    request.send();
+
+    request.onload = () => {
+        if (request.status === 200) {
+            const data = JSON.parse(request.response);
+            let output = "";
+            // console.log(data);
+
+            for (const i in data) {
+                output += `
+                    <div class="product">
+                        <h2 class="title">${data[i].subject}</h2>
+                        <p class="content">${data[i].description}</p>
+                    </div>
+                `;
+
+            }
+            document.getElementById("allquestions").innerHTML = output;
+
+            // for (const i in data) {
+            //     // console.log(data[i])
+            //     const title = document.createElement("div.title");
+            //     const textnode = document.createTextNode(data[i].title);
+            //     title.appendChild(textnode);
+            //     document.getElementById("myTable").appendChild(title);
+            //     const content = document.createElement("div.content");
+            //     const textnode1 = document.createTextNode(data[i].content);
+            //     content.appendChild(textnode1);
+            //     document.getElementById("myTable").appendChild(content);
+            // }
+        } else {
+            console.log(`error ${request.status}`);
+        }
+
+    }
+
+}

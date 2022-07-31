@@ -5,8 +5,8 @@ from rest_framework.response import Response
 
 from django.shortcuts import get_object_or_404
 
-from .models import Newsfeed
-from .serializers import NewsfeedSerializer
+from .models import Newsfeed, Questions
+from .serializers import NewsfeedSerializer, QuestionSerializer
 
 
 # Create your views here.
@@ -90,3 +90,34 @@ class NewsfeedDestroyAPIView(generics.DestroyAPIView):
 
 Newsfeed_delete_view = NewsfeedDestroyAPIView.as_view()
 
+
+
+# create question api_view 
+class QuestionCreateAPIView(generics.CreateAPIView):
+    queryset = Questions.objects.all()
+    serializer_class = QuestionSerializer
+    # permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    def perform_create(self, serializer):
+        print(serializer.validated_data)
+        userid = serializer.validated_data['userid']
+        subject=serializer.validated_data['subject']
+        description=serializer.validated_data['description']
+        answers=serializer.validated_data['answers']
+        like=serializer.validated_data['like']
+        dislike=serializer.validated_data['dislike']
+        serializer.save(userid=userid,subject=subject,description=description,answers=answers,like=like,dislike=dislike)
+        #djnago signals
+Question_create_api_view = QuestionCreateAPIView.as_view()
+
+
+
+# list all questions 
+class QuestionsListAPIView(generics.ListAPIView):
+    '''
+    Not gonna use this
+    '''
+    queryset = Questions.objects.all()
+    serializer_class = QuestionSerializer 
+
+Questions_list_view = QuestionsListAPIView.as_view()

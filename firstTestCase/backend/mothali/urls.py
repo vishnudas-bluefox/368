@@ -9,5 +9,7 @@ urlpatterns = [
     path('list/',views.Newsfeed_list_view),
     path('<int:pk>/update/',views.Newsfeed_update_view),
     path('<int:pk>/delete/',views.Newsfeed_delete_view),
+    path('questions/',views.Question_create_api_view),
+    path('questions/list/',views.Questions_list_view),
 
 ]

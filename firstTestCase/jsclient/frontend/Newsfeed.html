@@ -53,16 +53,11 @@
                 <form style="margin:15px;margin-top:0px;">
                     <!-- Message input -->
                     <div class="form-floating">
-                        <textarea class="form-control mb-2" placeholder="write" id="floatingTextarea2" style="height: 150px;background-color:rgba(190, 129, 182, 0.68);border: 0;color:white"></textarea>
-
-                    </div>
-                    <div class="input-group mb-3">
-                        <button type="button" class="buttontransperent" style="background-color:rgba(190, 129, 182, 0.68);height:37px;border-radius:5px 0px 0px 5px;"><i class="fas fa-tags fa-2x"></i></button>
-                        <input id="tags" type="text" class="form-control" placeholder="Enter tags" aria-label="Example text with button addon" aria-describedby="button-addon1" style="background-color:rgba(190, 129, 182, 0.68);border: 0;color:white;height:37px;" />
+                        <input type="text" class="form-control mb-2 feedtitle" id="feedtitle" style="height: 50px;background-color:rgba(190, 129, 182, 0.68);border: 0;color:rgb(241, 241, 241)" placeholder="Title">
+                        <textarea class="form-control mb-2 feedcontent" placeholder="write" id="feedcontent" style="height: 150px;background-color:rgba(190, 129, 182, 0.68);border: 0;color:white" placeholder="Description"></textarea>
                     </div>
                     <!-- Submit button -->
-                    <button type="button" class="btn btn-primary btn-block mb-4" id="postbutton" onclick="getpost()" data-bs-dismiss="modal" style="background-color:rgba(174, 114, 164, 0.68)">Post</button>
-                    <button type="button" class="btn btn-primary btn-block mb-4" id="editbutton" onclick="editpost()" data-bs-dismiss="modal" style="background-color:rgba(174, 114, 164, 0.68);display:none;">Edit Post</button>
+                    <button type="button" class="btn btn-primary btn-block mb-4" id="postbutton" onclick="createfeed()" data-bs-dismiss="modal" style="background-color:rgba(174, 114, 164, 0.68)">Post</button>
                 </form>
             </div>
         </div>
@@ -133,67 +128,11 @@
     <br><br><br><br><br>
     <!--bottom buttons-->
     <script src="js/main.js"></script>
+    <script src="js/newfeed.js"></script>
     <script>
         var votedown = false;
         var voteup = false;
         var pcid;
-
-        function getpost() {
-
-            var textarea = document.getElementById("floatingTextarea2");
-            console.log(textarea);
-            var input = textarea.value;
-            var postid = document.getElementsByClassName("postclass")[0].id;
-            if (input != 0) {
-                var uid = Date.now().toString();
-                var id = 'a' + uid;
-                var pid = 'p' + uid;
-                var cid = 'c' + uid;
-                var caid = 'ca' + uid;
-                var pcuid = 'pc' + uid;
-                var uuid = 'u' + uid;
-                var duid = 'd' + uid;
-                textarea.value = '';
-                const card = document.createElement('div');
-                const content = `
-  <div class="post" id=${pid}>
-    <br>
-
-    <div class="d-flex d-grid gap-2 d-md-block">
-      <button class="buttontransperent ms-3" type="button">User</button>
-      <button class="buttontransperent ms-2" type="button">Follow +</button>
-    </div>
-    <div class="postp">
-      <p id=${pcuid}>
-        ${input}      
-      </p>
-    </div>
-    <div class="postbuttons mb-0">
-      <div class=" d-flex align-items-center justify-content-center container-fluid" style="height: 50px;">
-        <button type="button" style="margin: auto" class=" buttontransperent"onclick='upvote("${uuid}")'><i class="fas fa-arrow-circle-up fa-2x"></i><h3 id="${uuid}" style="display: inline;margin-left: 5px;"></h3></button>
-        <button type="button" style="margin: auto" class=" buttontransperent"onclick='downvote("${duid}")'><i class="fas fa-arrow-circle-down fa-2x"></i><h3 id="${duid}" style="display: inline;margin-left: 5px;"></h3></button>
-        <button type="button" style="margin: auto;" class=" buttontransperent"data-bs-toggle="collapse" data-bs-target="#${id}" aria-expanded="false" aria-controls="${id}"><i class="far fa-comment fa-2x"></i></button>
-        <button type="button" style="margin: auto;" class=" buttontransperent"data-bs-toggle="modal" data-bs-target="#options" onclick='postcommentid("${pid}")'><i class="fas fa-ellipsis-v fa-2x"></i></button>
-    
-        
-      </div>
-    </div>
-    <br>
-  </div>
-  <div class="collapse" id="${id}">
-    <div class="mx-5 d-flex">
-      <textarea class="form-control mb-2 commentarea" placeholder="Leave a comment here" id="${caid}" style="color:white;" ></textarea>
-      <button type="button" style="margin-left:5px;" class="buttontransperent "onclick='postcomment("${caid}")'><i class="fas fa-paper-plane fa-2x"></i></button>
-     </div>
-     <div class="comments" id="${cid}">
-      
-     </div>
-   </div>  
-`;
-                document.getElementById(postid).innerHTML += content;
-            }
-            textarea.style.height = "150px";
-        }
 
         function postcomment(commentuid) {
             var postuid = commentuid.substring(2);
@@ -246,61 +185,6 @@
                 document.getElementById(commentid).innerHTML += content;
             }
             textarea.style.height = "35px";
-        }
-
-        function postcommentid(id) {
-            pcid = id;
-            console.log(pcid);
-        }
-
-        function deletepost() {
-            document.getElementById(pcid).remove();
-            document.getElementById('a' + pcid.substring(1)).remove();
-        }
-
-        function editbutton() {
-            console.log('pc' + pcid.substring(1));
-            var post = document.getElementById('pc' + pcid.substring(1)).innerText;
-            console.log(post);
-            document.getElementById("floatingTextarea2").value = post;
-            document.getElementById("postbutton").style.display = "none";
-            document.getElementById("editbutton").style.display = "";
-        }
-
-        function editpost() {
-
-            var textarea = document.getElementById("floatingTextarea2");
-            document.getElementById('pc' + pcid.substring(1)).innerText = textarea.value;
-            textarea.value = "";
-            document.getElementById("postbutton").style.display = "";
-            document.getElementById("editbutton").style.display = "none";
-        }
-
-        function cleartextarea() {
-            document.getElementById("floatingTextarea2").value = "";
-        }
-
-        function upvote(up) {
-            var votes = document.getElementById(up);
-            if (!voteup && !votedown) {
-                votes.innerText++;
-                voteup = true;
-            } else if (voteup && !votedown) {
-                votes.innerText--;
-                voteup = false;
-            }
-
-        }
-
-        function downvote(down) {
-            var votes = document.getElementById(down);
-            if (!votedown && !voteup) {
-                votes.innerText++;
-                votedown = true;
-            } else if (votedown && !voteup) {
-                votes.innerText--;
-                votedown = false;
-            }
         }
 
         function followed(follow) {

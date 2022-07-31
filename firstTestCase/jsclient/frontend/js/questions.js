@@ -2,7 +2,7 @@
 const request = new XMLHttpRequest()
     // create get request for list all the data from database 
 window.onload = function() {
-    request.open('GET', 'http://127.0.0.1:8000/api/mothali/list/');
+    request.open('GET', 'http://127.0.0.1:8000/api/mothali/questions/list/');
     request.send();
 
     request.onload = () => {
@@ -22,16 +22,16 @@ window.onload = function() {
 <div class="postp" >
   <p id="pcirstpost">
     <h3 class="title">
-    ${data[i].title}
+    ${data[i].subject}
     </h3>
-    <p class="content">${data[i].content}</p>
+    <p class="content">${data[i].description}</p>
   </p>
 </div>
 <div class="postbuttons mb-0">
   <div class=" d-flex align-items-center justify-content-center container-fluid" style="height: 50px;">
     <button type="button" style="margin: auto" class=" buttontransperent" id="upvotethepost" onclick='upvote()'><i class="fas fa-arrow-circle-up fa-2x"></i><h3 id="ufirstpost" style="display: inline;margin-left: 5px;"></h3>${data[i].like}</button>
     <button type="button" style="margin: auto" class=" buttontransperent" onclick='downvote()'><i class="fas fa-arrow-circle-down fa-2x"></i><h3 id="dfirstpost" style="display: inline;margin-left: 5px;"></h3>${data[i].dislike}</button>
-    <button type="button" style="margin: auto" class=" buttontransperent"data-bs-toggle="collapse" data-bs-target="#airstpost" aria-expanded="false" aria-controls="collapseExample"><i class="far fa-comment fa-2x"></i>${data[i].comments}</button>
+    <button type="button" style="margin: auto" class=" buttontransperent"data-bs-toggle="collapse" data-bs-target="#airstpost" aria-expanded="false" aria-controls="collapseExample"><i class="far fa-comment fa-2x"></i>${data[i].answers}</button>
     <button type="button" style="margin: auto" class=" buttontransperent"data-bs-toggle="modal" data-bs-target="#options"onclick='postcommentid("firstpost")'><i class="fas fa-ellipsis-v fa-2x"></i></button>
   </div>
 </div>
@@ -69,21 +69,4 @@ window.onload = function() {
 
     }
 
-}
-
-
-// add field 
-function addfield() {
-    const questions = document.getElementById("questions");
-    const question = document.createElement("div.question");
-}
-
-
-
-// for upvoting the post 
-function upvote() {
-    const orginalid = document.getElementById("upvotethepost");
-    const pandaid = document.getElementById("pandaid");
-    console.log(orginalid);
-    console.log(pandaid);
 }
