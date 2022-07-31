@@ -4,11 +4,11 @@ from rest_framework.response import Response
 
 # for creating pdf 
 
-import fpdf 
+import fpdf # python library to create pdf 
 import datetime 
 
 # Create your views here.
-
+# function based view 
 # rti pdf 
 @api_view(['POST'])
 def createpdf(request):
